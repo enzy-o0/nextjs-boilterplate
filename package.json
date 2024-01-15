@@ -10,6 +10,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.9",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.4",
+    "@mui/material-nextjs": "^5.15.3",
     "@prisma/client": "^5.8.0",
     "apollo-server": "^3.13.0",
     "apollo-server-micro": "^3.13.0",
