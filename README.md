@@ -7,6 +7,7 @@
 - TypeORM -> Prisma
 - MariaDB -> MongoDB
 - Graphql
+- Vercel 배포
 
 ## 실행하기
 
