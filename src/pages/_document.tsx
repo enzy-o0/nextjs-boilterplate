@@ -2,6 +2,7 @@ import { DocumentHeadTags, documentGetInitialProps } from '@mui/material-nextjs/
 import { Head, Html, Main, NextScript } from 'next/document';
 import type { DocumentProps } from 'next/document';
 import type { DocumentHeadTagsProps } from '@mui/material-nextjs/v13-pagesRouter';
+import type { NextPageContext } from 'next/types';
 
 // or `v1X-pagesRouter` if you are using Next.js v1X
 
@@ -19,7 +20,7 @@ export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps)
     );
 }
 
-MyDocument.getInitialProps = async (ctx) => {
-    const finalProps = await documentGetInitialProps(ctx);
-    return finalProps;
-};
+// MyDocument.getInitialProps = async (ctx: NextPageContext) => {
+//     const finalProps = await documentGetInitialProps(ctx);
+//     return finalProps;
+// };
