@@ -1,5 +1,5 @@
 import apolloClient from '@/app/lib/apolloClient';
-import BasicTabs from '@/components/BasicTabs';
+import TabMenu from '@/components/TabMenu';
 import TopAppBar from '@/components/TopAppBar';
 import { ApolloProvider } from '@apollo/client';
 import { AppCacheProvider } from '@mui/material-nextjs/v13-pagesRouter';
@@ -11,12 +11,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <ApolloProvider client={apolloClient}>
             {/* <AppCacheProvider {...pageProps}> */}
             <TopAppBar />
-            <BasicTabs />
+            <TabMenu />
 
-            <Container
-                maxWidth="sm"
-                style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >
+            <Container maxWidth="sm" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Component {...pageProps} />
             </Container>
             {/* </AppCacheProvider> */}
