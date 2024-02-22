@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -12,7 +12,50 @@ interface ArrowProps {
     isVisible: boolean;
 }
 
-function SampleNextArrow(props: ArrowProps) {
+interface ItemProps {
+    title: string;
+    imgSrc: string;
+}
+
+const BannerItems = [
+    {
+        title: '1번',
+        /* annie-spratt-UrRf8sxLGVo-unsplash */
+        imgSrc: '/images/1.jpg',
+    },
+    {
+        title: '2번',
+        /* lena-polishko-fZat_UWm3cI-unsplash */
+        imgSrc: '/images/2.jpg',
+    },
+    {
+        title: '3번',
+        /* thomas-de-luze-uFoKmskAUIE-unsplash */
+        imgSrc: '/images/3.jpg',
+    },
+    {
+        title: '4번',
+        imgSrc: '/images/1.jpg',
+    },
+    {
+        title: '5번',
+        imgSrc: '/images/2.jpg',
+    },
+    {
+        title: '6번',
+        imgSrc: '/images/3.jpg',
+    },
+    {
+        title: '7번',
+        imgSrc: '/images/1.jpg',
+    },
+    {
+        title: '8번',
+        imgSrc: '/images/2.jpg',
+    },
+];
+
+function BannerSliderButton(props: ArrowProps) {
     const { className, style, onClick, isVisible } = props;
     return (
         <Button
@@ -30,14 +73,13 @@ function SampleNextArrow(props: ArrowProps) {
     );
 }
 
-function SamplePrevArrow(props: ArrowProps) {
-    const { className, style, onClick, isVisible } = props;
+function BannerItemBox(item: ItemProps) {
+    const { imgSrc, title } = item;
+
     return (
-        <Button
-            className={className}
-            style={{ ...style, background: '#2F3438', display: isVisible ? 'block' : 'none', zIndex: 2 }}
-            onClick={onClick}
-        />
+        <Box>
+            <Image src={imgSrc} alt={`${title} 이미지`} width={269} height={508} />
+        </Box>
     );
 }
 
@@ -53,9 +95,10 @@ function BannerSlider() {
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
-        nextArrow: <SampleNextArrow isVisible={isVisible} />,
-        prevArrow: <SamplePrevArrow isVisible={isVisible} />,
+        nextArrow: <BannerSliderButton isVisible={isVisible} />,
+        prevArrow: <BannerSliderButton isVisible={isVisible} />,
     };
+
     return (
         <Box
             className="slider-container"
@@ -68,38 +111,9 @@ function BannerSlider() {
             }}
         >
             <Slider {...settings}>
-                <Box>
-                    {/* annie-spratt-UrRf8sxLGVo-unsplash */}
-                    <Image src="/images/1.jpg" alt="1번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* lena-polishko-fZat_UWm3cI-unsplash */}
-                    <Image src="/images/2.jpg" alt="2번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* thomas-de-luze-uFoKmskAUIE-unsplash */}
-                    <Image src="/images/3.jpg" alt="3번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* annie-spratt-UrRf8sxLGVo-unsplash */}
-                    <Image src="/images/1.jpg" alt="1번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* lena-polishko-fZat_UWm3cI-unsplash */}
-                    <Image src="/images/2.jpg" alt="2번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* thomas-de-luze-uFoKmskAUIE-unsplash */}
-                    <Image src="/images/3.jpg" alt="3번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* annie-spratt-UrRf8sxLGVo-unsplash */}
-                    <Image src="/images/1.jpg" alt="1번 이미지" width={269} height={508} />
-                </Box>
-                <Box>
-                    {/* lena-polishko-fZat_UWm3cI-unsplash */}
-                    <Image src="/images/2.jpg" alt="2번 이미지" width={269} height={508} />
-                </Box>
+                {BannerItems.map((item) => {
+                    return <BannerItemBox key={item.title} {...item} />;
+                })}
             </Slider>
         </Box>
     );

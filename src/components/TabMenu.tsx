@@ -1,36 +1,7 @@
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Container, styled } from '@mui/material';
 import Link from 'next/link';
-
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
 
 function a11yProps(index: number) {
     return {
@@ -40,39 +11,33 @@ function a11yProps(index: number) {
 }
 
 export default function TabMenu() {
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
-
     return (
         <Container maxWidth="lg">
-            <Box
-                sx={{
-                    borderBottom: 1,
-                    borderTop: 1,
-                    borderColor: 'divider',
-                    mt: 1,
-                    display: 'flex',
-                    flexDirection: 'row',
-                }}
-            >
-                <LinkWrapper>
+            <TabBox>
+                <LinkBox>
                     <Link href="/">홈</Link>
-                </LinkWrapper>
-                <LinkWrapper>
+                </LinkBox>
+                <LinkBox>
                     <Link href="/topics/recommend">추천</Link>
-                </LinkWrapper>
-                <LinkWrapper>
+                </LinkBox>
+                <LinkBox>
                     <Link href="/topics/hashtag-channel">채널</Link>
-                </LinkWrapper>
-            </Box>
+                </LinkBox>
+            </TabBox>
         </Container>
     );
 }
 
-const LinkWrapper = styled(Box)`
+const TabBox = styled(Box)`
+    border-bottom: 1rem;
+    border-top: 1rem;
+    border-color: divider;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+`;
+
+const LinkBox = styled(Box)`
     margin: 1rem;
 
     & > a {

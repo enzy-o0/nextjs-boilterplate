@@ -13,13 +13,24 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import InputWithIcon from './InputWithIcon';
+import { styled } from '@mui/material';
+import { useRouter } from 'next/router';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [
+    { title: '커뮤니티', path: '/' },
+    { title: '쇼핑', path: '/store' },
+    { title: '인테리어/생활', path: '/experts' },
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function TopAppBar() {
+    const router = useRouter();
+    console.log(router);
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    console.log(anchorElNav);
+    console.log(anchorElUser);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -37,31 +48,11 @@ function TopAppBar() {
     };
 
     return (
-        <AppBar
-            position="static"
-            color="transparent"
-            sx={{
-                boxShadow: 'none',
-            }}
-        >
+        <AppBarContainer position="static" color="transparent">
             <Container maxWidth="lg">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'SokchoBadaDotum',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            textDecoration: 'none',
-                            color: '#000',
-                        }}
-                    >
+                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' } }} />
+                    <Typography sx={{ display: { xs: 'none', md: 'flex' } }} variant="h6" noWrap component="a" href="/">
                         로고
                     </Typography>
 
@@ -95,41 +86,37 @@ function TopAppBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center" color={'#000'}>
-                                        {page}
-                                    </Typography>
+                                <MenuItem
+                                    key={page.title}
+                                    onClick={() => {
+                                        router.push(page.path);
+                                    }}
+                                >
+                                    <Typography textAlign="center">{page.title}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' } }} />
                     <Typography
                         variant="h5"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        href="/"
+                        sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1 }}
                     >
-                        LOGO
+                        로고
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, display: 'block', color: '#000' }}
+                                key={page.title}
+                                onClick={() => {
+                                    router.push(page.path);
+                                }}
+                                sx={{ my: 2, display: 'block' }}
                             >
-                                {page}
+                                {page.title}
                             </Button>
                         ))}
                     </Box>
@@ -168,7 +155,24 @@ function TopAppBar() {
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
+        </AppBarContainer>
     );
 }
 export default TopAppBar;
+
+const AppBarContainer = styled(AppBar)`
+    box-shadow: none;
+
+    & svg {
+        margin-right: 1rem;
+    }
+
+    & a {
+        margin-right: 2rem;
+        font-family: SokchoBadaDotum;
+        font-weight: 700;
+        letter-spacing: 0.3rem;
+        text-decoration: none;
+        color: #000;
+    }
+`;
